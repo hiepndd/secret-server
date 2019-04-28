@@ -10,21 +10,35 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 
-	// WARNING!
-	// Change this to a fully-qualified import path
-	// once you place this file into your project.
-	// For example,
-	//
-	//    sw "github.com/myname/myrepo/go"
-	//
-	sw "git.dwarvesf.com/secret-server/go"
+	sw "git.dwarvesf.com/secret-server/goapi/src/go"
+
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
+
+func validate(err error) {
+	if err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
+}
 
 func main() {
 	log.Printf("Server started")
+
+	// t := time.Now().Local()
+
+	// fmt.Println(t)
+
+	// s := time.Now().Local().Add(24 * time.Hour)
+
+	// fmt.Println(s)
+
+	validate(sw.Init())
 
 	router := sw.NewRouter()
 

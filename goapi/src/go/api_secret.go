@@ -10,15 +10,65 @@
 package swagger
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/http"
+	"strings"
+	"time"
+
+	"github.com/dchest/uniuri"
+)
+
+type secretText struct {
+	Text string `json:"secretText"`
+}
+
+var (
+	CIPHER_KEY = []byte("0123456789012345")
 )
 
 func AddSecret(w http.ResponseWriter, r *http.Request) {
+
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
 	w.WriteHeader(http.StatusOK)
+	//token := jwt.New(jwt.SigningMethodHS256)
+	txt := secretText{}
+	err := json.NewDecoder(r.Body).Decode(&txt)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	encryptText, err := Encrypt(CIPHER_KEY, txt.Text)
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+	hash := uniuri.New()
+
+	scret := &Secret{
+		Hash:           hash,
+		SecretText:     encryptText,
+		ExpiresAt:      time.Now().Local().Add(24 * time.Hour),
+		RemainingViews: 0,
+	}
+
+	err = Add(scret)
+
+	if err != nil {
+		http.Error(w, err.Error(), 500)
+		return
+	}
+
+	w.Write([]byte(hash))
 }
 
 func GetSecretByHash(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+
 	w.WriteHeader(http.StatusOK)
+
+	params := strings.Replace(r.URL.Path, "/v1/secret/", "", -1)
+
+	fmt.Println(params)
+
 }

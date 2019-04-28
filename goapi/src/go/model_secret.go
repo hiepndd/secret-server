@@ -11,18 +11,17 @@ package swagger
 
 import (
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 type Secret struct {
-
+	gorm.Model
 	// Unique hash to identify the secrets
 	Hash string `json:"hash,omitempty"`
 
 	// The secret itself
 	SecretText string `json:"secretText,omitempty"`
-
-	// The date and time of the creation
-	CreatedAt time.Time `json:"createdAt,omitempty"`
 
 	// The secret cannot be reached after this time
 	ExpiresAt time.Time `json:"expiresAt,omitempty"`
