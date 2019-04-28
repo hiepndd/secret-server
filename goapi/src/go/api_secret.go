@@ -24,7 +24,7 @@ type secretText struct {
 }
 
 var (
-	CIPHER_KEY = []byte("0123456789012345")
+	CipherKey = []byte("0123456789012345")
 )
 
 func AddSecret(w http.ResponseWriter, r *http.Request) {
@@ -38,7 +38,7 @@ func AddSecret(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), 500)
 		return
 	}
-	encryptText, err := Encrypt(CIPHER_KEY, txt.Text)
+	encryptText, err := Encrypt(CipherKey, txt.Text)
 	if err != nil {
 		http.Error(w, err.Error(), 500)
 		return
@@ -69,6 +69,8 @@ func GetSecretByHash(w http.ResponseWriter, r *http.Request) {
 
 	params := strings.Replace(r.URL.Path, "/v1/secret/", "", -1)
 
-	fmt.Println(params)
+	result, _ := Get(params)
+
+	fmt.Println(result)
 
 }
