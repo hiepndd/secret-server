@@ -1,0 +1,35 @@
+{
+	"ImportPath": "git.dwarvesf.com/secret-server/goapi",
+	"GoVersion": "go1.11",
+	"GodepVersion": "v80",
+	"Deps": [
+		{
+			"ImportPath": "github.com/dchest/uniuri",
+			"Rev": "8902c56451e9b58ff940bbe5fec35d5f9c04584a"
+		},
+		{
+			"ImportPath": "github.com/go-sql-driver/mysql",
+			"Comment": "v1.4.0-18-g2c9d54f",
+			"Rev": "2c9d54fefcfb443251f5b92cd5106cf4dc07b880"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Comment": "v1.7.0-4-gc5c6c98",
+			"Rev": "c5c6c98bc25355028a63748a498942a6398ccd22"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/gorm",
+			"Comment": "v1.9.2-1-g5ad6f62",
+			"Rev": "5ad6f621e6f59672f5b5061df85b243436fde048"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/gorm/dialects/mysql",
+			"Comment": "v1.9.2-1-g5ad6f62",
+			"Rev": "5ad6f621e6f59672f5b5061df85b243436fde048"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/inflection",
+			"Rev": "04140366298a54a039076d798123ffa108fff46c"
+		}
+	]
+}

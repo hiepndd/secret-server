@@ -30,14 +30,6 @@ func validate(err error) {
 func main() {
 	log.Printf("Server started")
 
-	// t := time.Now().Local()
-
-	// fmt.Println(t)
-
-	// s := time.Now().Local().Add(24 * time.Hour)
-
-	// fmt.Println(s)
-
 	validate(sw.Init())
 
 	router := sw.NewRouter()
